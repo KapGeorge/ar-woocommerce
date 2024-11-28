@@ -1,48 +1,51 @@
-# Wordpress - ignore core, configuration, examples, uploads and logs.
-# https://github.com/github/gitignore/blob/main/WordPress.gitignore
+# Ignore OS-specific and editor-specific files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.idea/
+.vscode/
 
-# Core
-#
-# Note: if you want to stage/commit WP core files
-# you can delete this whole section/until Configuration.
-/wp-admin/
-/wp-content/index.php
-/wp-content/languages
-/wp-content/plugins/index.php
-/wp-content/themes/index.php
-/wp-includes/
-/index.php
-/license.txt
-/readme.html
-/wp-*.php
-/xmlrpc.php
+# Ignore Composer dependencies (if any are used, exclude the vendor folder unless it's needed)
+vendor/
 
-# Configuration
-wp-config.php
+# Ignore Node.js dependencies and build files (if applicable)
+node_modules/
+npm-debug.log
+yarn.lock
+package-lock.json
 
-# Example themes
-/wp-content/themes/twenty*/
-
-# Example plugin
-/wp-content/plugins/hello.php
-
-# Uploads
-/wp-content/uploads/
-
-# Log files
+# Ignore log files and temporary files
 *.log
+*.tmp
 
-# htaccess
-/.htaccess
+# Ignore build and cache files
+*.cache
+*.bak
 
-# All plugins
-#
-# Note: If you wish to whitelist plugins,
-# uncomment the next line
-#/wp-content/plugins
+# Ignore WordPress-specific environment files
+wp-config.php
+wp-config-local.php
 
-# All themes
-#
-# Note: If you wish to whitelist themes,
-# uncomment the next line
-#/wp-content/themes
+# Ignore compiled assets (if applicable)
+assets/js/*.min.js
+assets/css/*.min.css
+dist/
+build/
+
+# Ignore WordPress uploads or temporary files
+uploads/
+wp-content/uploads/
+
+# Plugin-specific ignored files
+ar-plugin.zip
+ar-plugin-backup/
+*.bak
+
+# Ignore private keys and sensitive credentials
+*.pem
+*.crt
+*.key
+
+# Optional: Exclude unnecessary generated files (e.g., if you use gulp, grunt, or Webpack)
+.sass-cache/

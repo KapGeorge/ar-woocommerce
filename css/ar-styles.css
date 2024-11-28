@@ -1,0 +1,211 @@
+/* AR */
+
+/* Hide child nodes until the element is defined */
+:not(:defined) > * {
+    display: none;
+}
+
+/* Default styling for model-viewer */
+model-viewer {
+    background-color: #eee;
+    overflow-x: hidden;
+    --poster-color: #eee;
+    display: block;
+    height: 680px;
+    width: 100%;
+    z-index: 121;
+}
+
+/* Button styles for AR prompt */
+#ar-button {
+    background-image: url('../assets/ic_view_in_ar_new_googblue_48dp.png');
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    background-position: 12px 50%;
+    background-color: #fff;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    bottom: 10%;
+    padding: 0 16px 0 40px;
+    font-family: 'Roboto', Helvetica Neue, sans-serif;
+    font-size: 14px;
+    color: #4285f4;
+    height: 36px;
+    line-height: 36px;
+    border-radius: 18px;
+    border: 1px solid #DADCE0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Button active state */
+#ar-button:active {
+    background-color: #E8EAED;
+}
+
+/* Button focus state */
+#ar-button:focus {
+    outline: none;
+}
+
+#ar-button:focus-visible {
+    outline: 1px solid #4285f4;
+}
+
+/* Keyframe animation for rotating and moving elements */
+@keyframes circle {
+    from {
+        transform: translateX(-50%) rotate(0deg) translateX(50px) rotate(0deg);
+    }
+    to {
+        transform: translateX(-50%) rotate(360deg) translateX(50px) rotate(-360deg);
+    }
+}
+
+@keyframes elongate {
+    from {
+        transform: translateX(100px);
+    }
+    to {
+        transform: translateX(-100px);
+    }
+}
+
+/* Prompt for AR session */
+model-viewer > #ar-prompt {
+    position: absolute;
+    left: 50%;
+    bottom: 175px;
+    animation: elongate 2s infinite ease-in-out alternate;
+    display: none;
+}
+
+/* AR prompt appears after session starts */
+model-viewer[ar-status="session-started"] > #ar-prompt {
+    display: block;
+}
+
+/* AR prompt animation */
+model-viewer > #ar-prompt > img {
+    animation: circle 4s linear infinite;
+}
+
+/* Failure state for AR tracking */
+model-viewer > #ar-failure {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 175px;
+    display: none;
+}
+
+/* Failure state when not tracking */
+model-viewer[ar-tracking="not-tracking"] > #ar-failure {
+    display: block;
+}
+
+/* Slider container styles */
+.slider {
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+    position: absolute;
+    bottom: 16px;
+}
+
+/* Slide container with smooth scrolling */
+.slides {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none; /* For Internet Explorer */
+}
+
+/* Each individual slide style */
+.slide {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    width: 100px;
+    height: 100px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #fff;
+    margin-right: 10px;
+    border-radius: 10px;
+    border: none;
+    display: flex;
+}
+
+/* Styling for selected slide */
+.slide.selected {
+    border: 2px solid #4285f4;
+}
+
+/* Focus and active states for slides */
+.slide:focus {
+    outline: none;
+}
+
+.slide:focus-visible {
+    outline: 1px solid #4285f4;
+}
+
+/* Open AR button position and styling */
+.open-ar-js {
+    position: absolute;
+    bottom: 60px;
+    right: 10px;
+    z-index: 999;
+    height: 42px;
+    width: 42px;
+    cursor: pointer;
+}
+
+/* Button for placing AR model */
+button.placing {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    border-radius: 5px;
+    background: black;
+    z-index: 121;
+}
+
+/* AR visibility and other media queries */
+@media (max-width: 767px) {
+    model-viewer {
+        height: 400px; /* Adjust height on smaller screens */
+    }
+
+    #ar-button {
+        bottom: 5%; /* Adjust position of the button on smaller screens */
+        font-size: 12px;
+    }
+}
+
+/* Cross-browser support for scroll snapping */
+.slides {
+    -webkit-scroll-snap-type: x mandatory; /* For Safari */
+    -ms-scroll-snap-type: x mandatory; /* For IE */
+}
+
+/* AR Model Viewer Visibility for older browsers */
+model-viewer {
+    display: block !important; /* Ensures visibility in older browsers */
+}
+
+/* AR failure visibility on unsupported devices */
+model-viewer[ar-status="session-started"]:not([ar-tracking="not-tracking"]) > #ar-failure {
+    display: block;
+}
+
+/* AR model accessibility focus and interaction improvements */
+model-viewer:focus {
+    outline: 2px solid #4285f4;
+}
